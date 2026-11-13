@@ -1,0 +1,409 @@
+/* ============================================
+   Tugon - Shared Styles
+   Color palette: matches the blue/white palette
+   used on the home page (Barangay Alejal reference design)
+   ============================================ */
+
+:root {
+  --color-dark: #1E2340;         /* navy - main text color, matches home page's navy */
+  --color-primary: #4F5FE0;      /* main blue accent - buttons, links, panel backgrounds */
+  --color-primary-dark: #3E4DCB; /* darker blue - hover states */
+  --color-primary-light: #E7EAFD;/* light blue - used behind icons/badges */
+  --color-gray: #6B7280;         /* medium gray - secondary text */
+  --color-bg: #F5F6FA;           /* light gray-blue - page background */
+  --color-red: #D64545;          /* red - warnings/errors, matches home page's urgent color */
+  --color-border: #E4E6EF;       /* soft border color for inputs and cards */
+}
+
+* {
+  box-sizing: border-box;
+}
+
+/* Locks the page to exactly the height of the screen, no scrolling.
+   Browsers add a small default margin to <body> — that alone is often
+   the reason a split-screen layout ends up a few pixels taller than
+   the viewport and becomes scrollable. */
+html, body {
+  margin: 0;
+}
+
+/* Only the LOGIN page gets locked to the screen height with no scrolling.
+   We do this with a class instead of applying it to every page, because
+   pages with longer content (like the register form) genuinely need to
+   scroll — locking the whole site would trap that content off-screen. */
+body.login-page {
+  height: 100%;
+  height: 100dvh;
+  overflow: hidden;
+}
+
+body {
+  font-family: 'Lato', sans-serif;
+  background-color: var(--color-bg);
+  color: var(--color-dark);
+}
+
+/* ---------- Left branding panel (used on the login page) ---------- */
+/* This wrapper holds the image carousel AND the text on top of it.
+   "position: relative" is what lets us place the text using
+   "position: absolute" inside it later. */
+.brand-panel {
+  position: relative;
+  height: 100vh;   /* exact height, not min-height, so it can't grow past the screen */
+  height: 100dvh;  /* dvh = "dynamic viewport height", more reliable on phones */
+  background-color: var(--color-primary); /* shows briefly while images load */
+  overflow: hidden;
+  color: #ffffff;
+}
+
+/* The carousel itself needs to fill the entire panel */
+.brand-panel .carousel,
+.brand-panel .carousel-inner,
+.brand-panel .carousel-item {
+  height: 100%;
+}
+
+.brand-carousel-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* fills the space without stretching the photo */
+
+  /* Darkens the photo so the white text on top stays readable.
+     This is the same trick used on most login pages with photo backgrounds. */
+  filter: brightness(0.55);
+}
+
+/* This sits ON TOP of the carousel (z-index: 2) and holds the logo,
+   tagline, and feature list. Because it's positioned absolute and
+   covers the full panel, the text stays in place while the images
+   underneath keep changing. */
+.brand-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 2;
+  padding: 3rem 2.5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  pointer-events: none; /* lets carousel controls underneath stay clickable */
+}
+
+.brand-logo {
+  width: 42px;
+  height: 42px;
+  background-color: var(--color-primary);
+  color: var(--color-dark);
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  font-size: 1rem;
+}
+
+.brand-tagline {
+  font-size: 1.75rem;
+  font-weight: 600;
+  line-height: 1.4;
+  max-width: 320px;
+}
+
+.brand-subtext {
+  color: #C7CBF0;
+  font-size: 0.9rem;
+  max-width: 300px;
+  line-height: 1.6;
+}
+
+.brand-feature-list {
+  list-style: none;
+  padding: 0;
+  margin-top: 1.5rem;
+}
+
+/* Small badge on the admin login page so it's immediately clear
+   this is a different portal from the resident login */
+.admin-badge {
+  display: inline-block;
+  background-color: rgba(79, 95, 224, 0.18);
+  color: var(--color-primary);
+  border: 1px solid var(--color-primary);
+  border-radius: 20px;
+  padding: 0.25rem 0.75rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  margin-bottom: 0.75rem;
+}
+
+.brand-feature-list li {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  margin-bottom: 0.75rem;
+  font-size: 0.9rem;
+  color: #DEE1FA;
+}
+
+/* ---------- Right side form panel ---------- */
+.form-panel {
+  height: 100vh;
+  height: 100dvh;
+  overflow-y: auto;   /* only this side scrolls, and only if content is genuinely too tall */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+}
+
+.form-wrapper {
+  width: 100%;
+  max-width: 400px;
+}
+
+/* ---------- Card used on the register page ---------- */
+.register-card {
+  background-color: #ffffff;
+  border: 1px solid var(--color-border);
+  border-radius: 12px;
+  padding: 2.5rem;
+  max-width: 650px;
+  width: 100%;
+  margin: 3rem auto;
+}
+
+/* ---------- Custom Bootstrap overrides so buttons/links match our palette ---------- */
+.btn-gold {
+  background-color: var(--color-primary);
+  border-color: var(--color-primary);
+  color: #ffffff;
+  font-weight: 600;
+  padding: 0.65rem;
+}
+
+.btn-gold:hover {
+  background-color: var(--color-primary-dark);
+  border-color: var(--color-primary-dark);
+  color: #ffffff;
+}
+
+.link-gold {
+  color: var(--color-primary);
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.link-gold:hover {
+  text-decoration: underline;
+}
+
+.form-label {
+  font-weight: 600;
+  font-size: 0.9rem;
+  color: var(--color-dark);
+}
+
+.form-control:focus {
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 0.2rem rgba(79, 95, 224, 0.15);
+}
+
+/* Small helper text under the page title */
+.page-subtext {
+  color: var(--color-gray);
+  font-size: 0.9rem;
+}
+
+/* Success and error message boxes shown after form submission */
+.alert-gold {
+  background-color: var(--color-primary-light);
+  color: var(--color-primary-dark);
+  border: 1px solid var(--color-primary);
+  border-radius: 8px;
+  padding: 0.75rem 1rem;
+  font-size: 0.9rem;
+}
+
+.alert-red {
+  background-color: #F7E4E4;
+  color: var(--color-red);
+  border: 1px solid var(--color-red);
+  border-radius: 8px;
+  padding: 0.75rem 1rem;
+  font-size: 0.9rem;
+}
+
+/* ID upload preview box */
+#idPreviewBox {
+  border: 1px dashed var(--color-border);
+  border-radius: 10px;
+  padding: 1rem;
+  text-align: center;
+  color: var(--color-gray);
+  font-size: 0.85rem;
+}
+
+#idPreviewImg {
+  max-width: 100%;
+  max-height: 160px;
+  border-radius: 8px;
+  margin-top: 0.5rem;
+  display: none; /* shown by JavaScript once a photo is selected */
+}
+/* ===== Resident / Admin login switch + stable layout =====
+   Paste at the bottom of public/css/style.css (replace the old role-switch CSS). */
+
+/* ---------- The switch ---------- */
+.role-switch {
+  --rs-color: #1D4ED8;          /* your blue (use #C9A227 for gold) */
+  --rs-skew: -14deg;
+
+  position: relative;
+  display: inline-flex;
+  width: 260px;
+  height: 46px;
+  margin-bottom: 1.75rem;
+  border: 2px solid var(--rs-color);
+  background: transparent;
+  overflow: hidden;
+  transform: skewX(var(--rs-skew));
+}
+
+.role-switch__thumb {
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: 50%;
+  background: var(--rs-color);
+  transition: transform .28s ease;
+}
+body[data-role="admin"] .role-switch__thumb { transform: translateX(100%); }
+
+.role-switch__opt {
+  position: relative;
+  z-index: 1;
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+  font: inherit;
+  font-weight: 700;
+  font-size: .9rem;
+  color: var(--rs-color);
+  transition: color .28s ease;
+}
+.role-switch__opt[aria-selected="true"] { color: #fff; }
+
+/* un-skew the text so it stays upright */
+.role-switch__opt span {
+  display: inline-block;
+  transform: skewX(calc(var(--rs-skew) * -1));
+}
+.role-switch__opt:focus-visible { outline: 2px solid #2C2C2A; outline-offset: -4px; }
+
+/* ---------- Right side: both forms share one grid cell ---------- */
+.form-stack { display: grid; }
+
+.form-stack > .login-form {
+  grid-area: 1 / 1;              /* stack on top of each other */
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(6px);
+  transition: opacity .25s ease, transform .25s ease, visibility 0s linear .25s;
+}
+body[data-role="resident"] .login-form[data-role="resident"],
+body[data-role="admin"]    .login-form[data-role="admin"] {
+  opacity: 1;
+  visibility: visible;
+  transform: none;
+  transition-delay: 0s;
+}
+
+/* ---------- Left side: both brand panels stacked, one visible ---------- */
+.brand-set {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity .35s ease, visibility 0s linear .35s;
+}
+.brand-set .carousel { height: 100%; }
+body[data-role="resident"] .brand-set[data-role="resident"],
+body[data-role="admin"]    .brand-set[data-role="admin"] {
+  opacity: 1;
+  visibility: visible;
+  transition-delay: 0s;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .role-switch__thumb, .role-switch__opt,
+  .form-stack > .login-form, .brand-set { transition: none; }
+}
+
+/* ============================================================
+   REGISTER PAGE - split layout (matches the login page's feel)
+   ============================================================ */
+.register-shell { display: grid; grid-template-columns: minmax(300px, 400px) 1fr; min-height: 100vh; }
+
+/* Left: brand panel with the approval path (it really is a sequence) */
+.register-aside {
+  position: sticky; top: 0; height: 100vh; overflow: hidden;
+  display: flex; flex-direction: column; justify-content: space-between;
+  padding: 3rem 2.5rem; color: #fff;
+  background: linear-gradient(165deg, #1E2340 0%, #2B3590 70%, #4F5FE0 100%);
+}
+.register-aside::after {            /* soft ring, the one decorative touch */
+  content: ""; position: absolute; right: -140px; bottom: -140px;
+  width: 360px; height: 360px; border-radius: 50%;
+  border: 56px solid rgba(255,255,255,.06); pointer-events: none;
+}
+.register-aside .aside-logo { width: 46px; height: 46px; border-radius: 12px; overflow: hidden; }
+.register-aside h1 { font-size: 1.9rem; font-weight: 800; line-height: 1.25; margin: 1.5rem 0 .75rem; }
+.register-aside .aside-lead { color: #C7CBF0; font-size: .95rem; line-height: 1.6; max-width: 310px; }
+.aside-steps { list-style: none; padding: 0; margin: 0; position: relative; z-index: 1; }
+.aside-steps li { display: flex; gap: .9rem; align-items: flex-start; margin-bottom: 1.15rem; font-size: .92rem; color: #DEE1FA; line-height: 1.45; }
+.aside-steps li strong { display: block; color: #fff; font-weight: 700; }
+.aside-steps .step-num {
+  flex: 0 0 30px; height: 30px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-weight: 800; font-size: .85rem; border: 1.5px solid rgba(255,255,255,.45);
+}
+.aside-steps li:first-child .step-num { background: #fff; color: #1E2340; border-color: #fff; }
+
+/* Right: the form */
+.register-main { padding: 3rem 2.5rem; background: #fff; display: flex; justify-content: center; }
+.register-shell .register-card { background: transparent; border: 0; border-radius: 0; padding: 0; margin: 0; max-width: 680px; width: 100%; }
+.register-card .form-heading { font-size: 1.75rem; font-weight: 800; margin: 0 0 .25rem; }
+
+.form-section {
+  font-size: 1rem; font-weight: 800; margin: 1.5rem 0 .9rem; padding-bottom: .55rem;
+  border-bottom: 1px solid var(--color-border);
+}
+.form-section.first { margin-top: 1.75rem; }
+
+.register-card .form-control,
+.register-card .form-select {
+  border: 1px solid var(--color-border); border-radius: 10px;
+  padding: .65rem .85rem; background-color: #FAFBFE; font-size: .95rem;
+}
+.register-card .form-control:focus,
+.register-card .form-select:focus { background-color: #fff; border-color: var(--color-primary); box-shadow: 0 0 0 .2rem rgba(79,95,224,.15); }
+.register-card .form-control:disabled { background-color: #F0F2F8; color: var(--color-gray); }
+
+#idPreviewBox { background: var(--color-primary-light); border: 1.5px dashed #AEB6F2; border-radius: 12px; }
+
+.consent-box { background: var(--color-primary-light); border-radius: 12px; padding: .9rem 1rem .9rem 2.3rem; margin-bottom: 1.25rem; }
+.register-card .btn-gold { border-radius: 10px; padding: .8rem; font-size: 1rem; }
+
+@media (max-width: 900px) {
+  .register-shell { grid-template-columns: 1fr; }
+  .register-aside { position: static; height: auto; padding: 2rem 1.5rem; gap: 1.5rem; }
+  .register-aside h1 { font-size: 1.5rem; margin-top: 1rem; }
+  .register-main { padding: 2rem 1.25rem; }
+}

@@ -1,0 +1,72 @@
+/* =====================================================================
+   Tugon — global recolor + rename bridge (LOAD THIS FILE LAST)
+   ---------------------------------------------------------------------
+   Put this in  public/css/civitas-overrides.css  and add this line
+   AFTER the existing pabarang links on every admin/resident page:
+
+     <link href="{{ asset('css/civitas-overrides.css') }}?v=1" rel="stylesheet">
+     <script src="{{ asset('js/civitas-brand.js') }}?v=1"></script>
+
+   What it does:
+   1. Re-tunes every page's CSS variables (--ref-blue, --ref-bg, --navy...)
+      from the old light blue to the Tugon deep-navy palette.
+   2. Deepens the admin sidebar and resident sidebar backgrounds.
+   3. civitas-brand.js swaps the visible "Tugon" text to "Tugon"
+      everywhere (including document.title) so you don't have to hand-edit
+      30 blade files. Remove it later once you've renamed the strings.
+   ===================================================================== */
+
+:root {
+  --ref-blue:      #3D4ED1 !important;   /* deep action blue (was #4F5FE0) */
+  --ref-blue-dark: #2E3AA8 !important;
+  --ref-navy-text: #12183C !important;
+  --ref-bg:        #EEF0F8 !important;
+  --ref-border:    #D8DCEF !important;
+  --ref-tint:      #E3E7FB !important;
+  --ref-tint-border:#C3CBF2 !important;
+
+  --color-primary:        #3D4ED1 !important;
+  --color-primary-dark:   #2E3AA8 !important;
+  --color-primary-light:  #E3E7FB !important;
+
+  --brand-blue:       #3D4ED1 !important;
+  --brand-blue-light: #2E3AA8 !important;
+  --brand-blue-dark:  #1B2454 !important;
+  --brand-gold:       #D9B44A !important;
+  --brand-gold-light: #EFD27E !important;
+
+  --navy:        #0B1026 !important;   /* resident sidebar */
+  --navy-active: #3D4ED1 !important;
+}
+
+/* ===== Admin sidebar: darker navy ===== */
+.admin-sidebar {
+  background: #0E1430 !important;      /* was #1E2340 */
+}
+.admin-sidebar .sidebar-label { color: #5C6694 !important; }
+.admin-sidebar .sidebar-link { color: #AEB6DA !important; }
+.admin-sidebar .sidebar-link:hover { background: #182049 !important; color: #fff !important; }
+.admin-sidebar .sidebar-link.active {
+  background: #3D4ED1 !important;
+  box-shadow: 0 6px 16px rgba(61,78,209,.35);
+}
+
+/* sidebar SVG logo tiles that used the old blue gradient */
+.admin-sidebar .brand-logo-lg rect,
+.admin-sidebar .brand-logo-lg { background: #3D4ED1 !important; }
+
+/* ===== Resident sidebar (in case a page doesn't use the new partial) ===== */
+.sidebar { background: var(--navy) !important; }
+.sidebar .nav-link:hover { background: #131A3D !important; }
+.sidebar .nav-link.active { background: #3D4ED1 !important; }
+.sidebar .nav-label, .sidebar .nav-group-toggle { color: #5C6694 !important; }
+.sidebar .sidebar-account, .sidebar .account-popup { background: #0B1026 !important; }
+.sidebar .account-popup { background: #131A3D !important; }
+.sidebar .account-btn:hover, .sidebar .account-btn.open, .sidebar .account-btn.active { background: #131A3D !important; }
+
+/* ===== Admin topbar avatar ===== */
+.admin-avatar { background: #3D4ED1 !important; }
+
+/* ===== Buttons that hardcode the old blue inline ===== */
+.btn-new-announcement, .btn-new-official { background: #3D4ED1 !important; }
+.btn-new-announcement:hover, .btn-new-official:hover { background: #2E3AA8 !important; }
